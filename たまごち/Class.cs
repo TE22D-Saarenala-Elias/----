@@ -1,14 +1,14 @@
 public class たまごち{
     int hunger;
     int boredom;
-    List <string> words = ["Hello", "bye", "ragnoirog", "wEOFIJOF"]; 
-    bool isAlive;
+    List <string> words = ["Hello", "bye"]; 
+    bool isAlive=true;
     public Random generator = new Random();
 
     public string name;
 
     public void Feed(){
-        hunger--;
+        hunger-=2;
         Console.WriteLine(name + ": jumi");
 
     } 
@@ -16,35 +16,42 @@ public class たまごち{
     public void Hi(){
         Console.WriteLine(name + ": "+ words[generator.Next(words.Count)]);
         ReduceBoredom();
-
+       
     }
 
-//     public void Teach (word : String){
-
-//     }
+    public void Teach ( String word ){
+        Console.WriteLine("\n"+ name + " learned the word "  + word + ".");
+        words.Add(word);
+        Console.WriteLine(name + ": " + words[words.Count -1] + "\n");
+        ReduceBoredom();
+    }
     
-//     public void Tick ()
-//     {
-//         if (isAlive)
-//         {
-//             boredom++;
-//             hunger++;   
-//             if (boredom >10||hunger >10)
-//             {
-//                isAlive=false;
-//             }         
-//         }
-//         else {
-//             Console.WriteLine("The Tamagochi is dead");
-//         }
-//     }
+    public void Tick ()
+    {
+        if (isAlive)
+        {
+            boredom++;
+            hunger++;   
+            if (boredom >10||hunger >10)
+            {
+               isAlive=false;
+            }         
+        }
+        else {
+            Console.WriteLine("The Tamagochi is dead");
+        }
+    }
 
     public void PrintStats(){
         string condition;
         if(isAlive)
-          {condition = "lever";}
-          else {condition="död";}
-        Console.WriteLine(name + "'s hunger is " + hunger+".\n"+ name +"'s boredom is "+ boredom +".\n Which means " + name + " is "  );
+          {condition = "alive";}
+          else {condition="dead";}
+          if (hunger<0) 
+           { hunger=0; }
+           if (boredom<0)
+           {boredom=0;}
+        Console.WriteLine(name + "'s hunger is " + hunger+".\n"+ name +"'s boredom is "+ boredom +".\n Which means " + name + " is " + condition + "." );
     }
 
     public bool GetAlive(){
@@ -53,7 +60,7 @@ public class たまごち{
     }
 
    private void ReduceBoredom(){
-        boredom--;
+        boredom-=2;
         
     }
     
